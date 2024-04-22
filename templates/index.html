@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>AI BASED SYSTEM FOR ENHANCED CORONARY CT ANGIOGRAPHY</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand-title"><a href="{{ url_for('home') }}">PLAQUE CLASSIFICATION AND STENOSIS DETECTION</a></div>
+        <ul class="menu">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}" target = "_blank">About Us</a></li>
+          </ul>
+    </nav>
+    <center>
+        <div class= "title_"><h1>AI BASED SYSTEM FOR ENHANCED CORONARY CT </h1> <h1 class="title_1">&nbspANGIOGRAPHY</h1></div>
+    <div class = "elements">
+        <div class="element1">
+        <p id="desc">"Build Healthy <span class="desc_">Life</span>,<br> Embrace Life: Empowering You to Defeat <span class="desc_">CARDIOVASCULAR HEART ATTACKS</span>."</p>
+        <h2>Upload an image of a CCTA Scan</h2>
+        <h2 id='n'><b>NOTE:</b> Only upload Heart CCTA Images</h2>
+        <form id="uploadForm" method="POST" action="/classify" enctype="multipart/form-data">
+            <div class="form-group">
+                <br>
+                <input type="file" name="file" id="fileInput" accept=".jpg, .jpeg, .png" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Classify">
+            </div>
+        </div>
+
+        <div class="element2">
+            
+        </div>
+    </div>
+
+    </form>
+    <div id="result" class="result-container">
+        <div id="loading" class="loading">Processing...</div>
+        <div id="prediction" class="prediction"></div>
+        <div id="imagePreview" class="image-preview"></div>
+    </div>
+
+</center>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <div class="footer">
+        <br>
+        
+    <div>
+</body>
+</html>

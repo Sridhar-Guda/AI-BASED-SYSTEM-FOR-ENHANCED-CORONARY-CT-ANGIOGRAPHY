@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics</title>
+    <!-- Add any necessary CSS or styling here -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        .buttons {
+            display: flex;
+            /* justify-content: space-between; */
+            margin-top: 20px;
+            justify-content: center; /* Align buttons in the center */
+        }
+
+        .buttons button {
+            margin: 0; /* Remove margin between buttons */
+        }
+
+        .container_stats {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand-title"><a href="{{ url_for('home') }}">PLAQUE CLASSIFICATION AND STENOSIS DETECTION</a></div>
+    <ul class="menu">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}" target="_blank">About Us</a></li>
+    </ul>
+</nav>
+
+<div class="header">
+    <div class="title_">
+        <h1>AI BASED SYSTEM FOR ENHANCED CORORNARY CT&nbsp&nbsp</h1>
+        <h1 class="title_1">ANGIOGRAPHY</h1>
+    </div>
+</div>
+
+<h1 id="stats">Statistics</h1>
+
+<div class="features_">
+    DataSet Used: <a href="https://drive.google.com/drive/u/5/folders/1tgi9-Xy9S4ZfYbRP2m-11gnppwuqyMj7" class="dataset" target="_blank">Dataset</a>
+    <p>Number of Images Used: 62</p>
+    <p>Number of images used to train model: 49</p>
+    <p>Number of images used to test model: 13</p>
+
+    <p>Number of Classes:</p>
+    <ul class="classes">
+        <li>Plaque</li><br>
+        <li>No Plaque</li>
+    </ul>
+    <h2>{{ predicted_class }}</h2>
+</div>
+
+<div class="buttons">
+    <button onclick="toggleVisibility('predict-category')">Metrics Evaluation</button>&nbsp&nbsp&nbsp
+    <button onclick="toggleVisibility('confusion-matrix')">Confusion Matrix</button>&nbsp&nbsp&nbsp
+    <button onclick="toggleVisibility('training-graph')">Training Graph</button>&nbsp&nbsp&nbsp
+</div>
+
+<div class="container_stats">
+    <div id="predict-category">
+        <!-- Display the statistics -->
+        <h2>Metrics Evaluation</h2>
+        <div class="result_acc">
+            <h2>Accuracy: {{ metrics['Accuracy'] }}</h2>
+            <h2>Precision: {{ metrics['Precision'] }}</h2>
+            <h2>Recall: {{ metrics['Recall'] }}</h2>
+            <h2>F1 Score: {{ metrics['F1 Score'] }}</h2>
+        </div>
+    </div>
+
+    <!-- Display the confusion matrix -->
+    <div id="confusion-matrix" style="display: none;">
+        <h3>Confusion Matrix</h3>
+        <img src="{{ conf_path }}" alt="Confusion Matrix">
+    </div>
+
+    <!-- Insert training graph image -->
+    <div id="training-graph" style="display: none;">
+        <h2>Training Graph</h2>
+        <img src="{{ url_for('static', filename='img/training_graph.png') }}" alt="Training Graph">
+    </div>
+</div>
+
+<!-- Include the necessary JavaScript libraries -->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plot_confusion_matrix.js') }}"></script>
+
+<script>
+function toggleVisibility(sectionId) {
+    var sections = document.getElementsByClassName('container_stats')[0].children;
+    for (var i = 0; i < sections.length; i++) {
+        if (sections[i].id === sectionId) {
+            sections[i].style.display = sections[i].style.display === 'block' ? 'none' : 'block';
+        } else {
+            sections[i].style.display = 'none';
+        }
+    }
+}
+</script>
+</body>
+</html>

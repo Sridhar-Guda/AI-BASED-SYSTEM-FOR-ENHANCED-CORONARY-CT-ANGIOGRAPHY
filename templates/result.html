@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Classification Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Add custom CSS for numbered list and line spacing */
+        .result ul {
+            list-style-type: decimal;
+            line-height: 1.5; /* Adjust line spacing as needed */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand-title"><a href="{{ url_for('home') }}">PLAQUE CLASSIFICATION AND STENOSIS DETECTION</a></div>
+        <ul class="menu">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}" target="_blank">About Us</a></li>
+        </ul>
+    </nav>
+    <div class="header">
+        <div class="title_"><h1>AI BASED SYSTEM FOR ENHANCED CORONARY CT</h1> <h1 class="title_1">&nbspANGIOGRAPHY</h1></div>
+    </div>
+    <div class="main">
+        <div class="container">
+            <h1 id="head2">Plaque Classification Result</h1>
+            <div class="result">
+                <h2>Predicted Category:</h2>
+                <p><span style="color: #FF0000 ; font-weight: bold;">{{ predicted_class }}</span></p>
+                <h2>Stenosis Result:</h2>
+                <p><span style="color: #FF0000 ; font-weight: bold;">{{ stenosis_result }}</span></p>
+                <h2>Precautions:</h2>
+                <ul>
+                    {% for item in precautions %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="image_">
+            <div class="image_name"> <p>{{ image_file }}</p></div>
+            <div class="image_file"><img src="{{ url_for('uploaded_file', filename=image_file) }}" alt="Uploaded Image" id="xray_img"></div>
+            <br>
+            <div class="feedback">
+                <h2>Are you satisfied with the result?</h2>
+                <div class="feedback_">
+                    <input type="radio" name="satisfied" value="yes" id="satisfied_yes"> Yes
+                    <input type="radio" name="satisfied" value="no" id="satisfied_yes"> No
+                </div>
+                <br>
+                <a href="{{ url_for('display_statistics') }}">Check Statistics</a>
+                <a href="{{ url_for('home') }}">Click Here To Upload Another Image</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</body>
+</html>
